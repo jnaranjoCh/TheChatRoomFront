@@ -1,4 +1,5 @@
 <template>
+    <InfoUser></InfoUser>
     <div class="historyMsg container">
         
         <div v-if="messages.length > 0">
@@ -30,8 +31,14 @@
 </template>
 
 <script>
+
+import { defineAsyncComponent } from 'vue'
+
 export default {
     name: 'Msgs',
+    components: {
+        InfoUser: defineAsyncComponent( () => import('./InfoUser.vue')),
+    },
     data() {
         return {
             messages: [{
@@ -71,6 +78,7 @@ export default {
 
     .cardRight {
         background: #056162;
+        color: white;
     }
 
     .cardLeft {

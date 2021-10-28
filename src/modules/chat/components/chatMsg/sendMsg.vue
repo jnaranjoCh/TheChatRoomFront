@@ -44,6 +44,7 @@ export default {
         border-radius: 20px;
         color: white;
         padding-left: 2%;
+        border: none;
     }
 
     .enviarText {
