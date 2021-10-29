@@ -1,11 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NotFound from '../views/NotFound.vue'
+import isDenegadeAccess from './access'
 
 const routes = [{
-        path: '/',
-        redirect: '/login'
-    },
-    {
         path: '/login',
         name: 'Login',
         component: () =>
@@ -14,6 +11,7 @@ const routes = [{
     {
         path: '/home',
         name: 'ChatHome',
+        beforeEnter: [isDenegadeAccess],
         component: () =>
             import ( /* webpackChunkName: "ChatHome" */ '@/modules/chat/views/ChatHome.vue')
     },

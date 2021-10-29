@@ -2,11 +2,15 @@
   <div class="listHistory">
       <div v-if="historial.length > 0">
 
-          <div v-for="(hist, index) in historial" :key="index">
+        <div class="scrollColumn">
 
-              <TagUser :user="hist"></TagUser>
+            <div v-for="(hist, index) in historial" :key="index">
 
-          </div>
+                <TagUser :user="hist"></TagUser>
+
+            </div>
+        
+        </div>
 
       </div>
       <div v-else>
@@ -22,6 +26,8 @@
 <script>
 
 import { defineAsyncComponent } from 'vue'
+import { mapState, mapMutations } from 'vuex';
+import { urlApis, getBasic } from '@/config/apisRutes';
 
 export default {
     name: 'ListSala',
@@ -30,34 +36,44 @@ export default {
     },
     data() {
         return {
-            historial: [
-
-                // {
-                //     nickName: "jnaranjoCh",
-                //     lastMsg: "no se"
-                // },
-                // {
-                //     nickName: "luis naranjo",
-                //     lastMsg: "no se 2"
-                // },
-                // {
-                //     nickName: "manuel fernandes",
-                //     lastMsg: "no se 3"
-                // },
-                // {
-                //     nickName: "cesar cordoba",
-                //     lastMsg: "no se 4"
-                // },
-                // {
-                //     nickName: "david chourio",
-                //     lastMsg: "no se 5"
-                // },
-                // {
-                //     nickName: "eduardo valderrama",
-                //     lastMsg: "no se 6"
-                // }
-            ]
+            historial: []
         }
+    },
+    computed: {
+        ...mapMutations(['updateUser']),
+        ...mapState(['userActive'])
+    },
+    methods: {
+
+        async getSalas() {
+
+            const data = await fetch( urlApis.getSalas + this.userActive.nickName, getBasic);
+            const response = await data.json();
+
+            if (response) {
+
+                this.historial = response.map( user => {
+
+                    let userReq = this.userActive.nickName === user.usuarioEmisor.nickName ?
+                                    user.usuarioReceptor : user.usuarioEmisor;
+
+                    return {
+                        id: user._id,
+                        ultMsg: user.ultimoMsg,
+                        usuario: {
+                            id: userReq._id,
+                            nickName: userReq.nickName
+                        }
+                    }
+                });
+
+            } else
+                this.historial = [];
+        }
+    },
+    created() {
+
+        this.getSalas();
     }
 }
 </script>
@@ -72,6 +88,10 @@ export default {
         display: flex;
         justify-content: center;
         color: #33383b;
+    }
+
+    .scrollColumn {
+
     }
 
 </style>

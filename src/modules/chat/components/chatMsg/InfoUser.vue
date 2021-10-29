@@ -4,7 +4,7 @@
         <img src="@/assets/user.png" alt="user" class="image"/>
     </div>
     <div class="nickName">
-        <h4>{{ nickName }}</h4>
+        <h4>{{ nameUser }}</h4>
     </div>
   </div>
 </template>
@@ -13,9 +13,10 @@
 
 export default {
     name: 'InfoUser',
-    data() {
-        return {
-            nickName: 'jnaranjoCh'
+    props: {
+        nameUser: {
+            type: String,
+            required: true
         }
     }
 }

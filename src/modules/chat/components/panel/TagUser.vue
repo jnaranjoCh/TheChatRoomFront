@@ -1,20 +1,24 @@
 <template>
-  <div class="tagUser">
+  <div class="tagUser" v-on:click="selectChat()">
     <div class="imgUser">
         <img src="@/assets/user.png" alt="user" class="image"/>
     </div>
     <div class="infoUser">
       <div>
-        <label class="nickName">{{ user.nickName }}</label>
+        <label class="nickName">{{ user.usuario.nickName }}</label>
       </div>
       <div>
-        <span class="lastMsg"> {{ user.lastMsg }} </span>
+        <span class="lastMsg"> {{ user.ultMsg }} </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+import { mapMutations } from 'vuex';
+import { getBasic, urlApis } from '@/config/apisRutes';
+
 export default {
     name: 'TagUser',
     props: {
@@ -23,6 +27,31 @@ export default {
         required: true
       }
     },
+    methods: {
+
+      selectChat() {
+        this.getMessages();
+        this.updateSala(this.user);
+      },
+      async getMessages() {
+
+            const data = await fetch( urlApis.getMsgs + this.user.id, getBasic);
+            const response = await data.json();
+
+            const result = response.map( msg => {
+
+              return {
+                id: msg._id,
+                fecha: msg.fecha,
+                texto: msg.texto,
+                reqOrResp: msg.usuarioReceptor === this.user.usuario.id
+              }
+            });
+
+            this.$store.dispatch('actionUpdateMsgs', result);
+      },
+      ...mapMutations(['updateSala'])  
+    }
 }
 </script>
 

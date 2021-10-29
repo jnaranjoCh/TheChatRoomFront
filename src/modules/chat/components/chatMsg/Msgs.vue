@@ -1,10 +1,10 @@
 <template>
-    <InfoUser></InfoUser>
+    <InfoUser :nameUser="sala.usuario.nickName"></InfoUser>
     <div class="historyMsg container">
         
-        <div v-if="messages.length > 0">
+        <div v-if="getMsgsActive.length > 0">
             
-            <div v-for="(msg, index) in messages" :key="index">
+            <div v-for="(msg, index) in getMsgsActive" :key="index">
 
                 <div class="directionCard" v-bind:class="{ 'activeFlex': msg.reqOrResp }">
 
@@ -33,23 +33,20 @@
 <script>
 
 import { defineAsyncComponent } from 'vue'
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Msgs',
+    props: {
+        sala: {
+            type: Object
+        }
+    },
     components: {
         InfoUser: defineAsyncComponent( () => import('./InfoUser.vue')),
     },
-    data() {
-        return {
-            messages: [{
-                texto: "mensaje 1111111111",
-                reqOrResp: false
-            },
-            {
-                texto: "si es true es porque yo envio",
-                reqOrResp: true
-            }]
-        }
+    computed: {
+        ...mapGetters(['getMsgsActive'])
     }
 }
 </script>

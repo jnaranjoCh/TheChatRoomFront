@@ -16,12 +16,29 @@
 <script>
 
 import { defineAsyncComponent } from 'vue'
+import { mapState, mapMutations } from 'vuex';
 
 export default {
     
     components: {
         History: defineAsyncComponent( () => import('@/modules/chat/components/History.vue')),
         Chat: defineAsyncComponent( () => import('@/modules/chat/components/Chat.vue'))
+    },
+    created() {
+
+        if (this.userActive === null)
+            this.validateUser();
+    },
+    computed: {
+        ...mapMutations(['updateUser']),
+        ...mapState(['userActive'])
+    },
+    methods: {
+
+        validateUser() {
+
+            this.$store.dispatch('actionUserUp', JSON.parse( localStorage.getItem('user') ));
+        }
     }
 }
 </script>

@@ -4,18 +4,23 @@
           <img src="@/assets/user.png" alt="user" class="image"/>
       </div>
       <div class="nameUser">
-          <h4> {{ name }} </h4>
+          <h4> {{ userActive.nickName }} </h4>
       </div>
   </div>
 </template>
 
 <script>
+
+import { mapState, mapMutations } from 'vuex';
+
 export default {
     name: 'Presentation',
-    data() {
-        return {
-            name: 'jesus naranjo'
-        }
+    computed: {
+        ...mapState(['userActive']),
+        ...mapMutations(['updateUser'])
+    },
+    methods: {
+
     }
 }
 </script>
