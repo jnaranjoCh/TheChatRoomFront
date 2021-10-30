@@ -24,11 +24,13 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .infoUser {
         height: 10.8%;
         display: flex;
         flex-direction: row;
-        background: #33383b;
+        background: $backgroundGrayLight;
     }
 
     .imgUser {

@@ -75,12 +75,14 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .createSala {
         width: 95%;
     }
 
     .inputCreate {
-        background: #33383b;
+        background: $backgroundGrayLight;
         border-radius: 20px;
         color: white;
         padding-left: 5%;

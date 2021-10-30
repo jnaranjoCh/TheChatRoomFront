@@ -14,8 +14,10 @@
 
 <style scoped lang="scss">
 
+    @import '@/styles/styles.scss';
+
     body {
-        background: #dedede;   
+        background: $fontColorChat;   
     }
 
     .error-template {

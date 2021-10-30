@@ -94,6 +94,8 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .listHistory {
         height: 100%;
     }
@@ -101,7 +103,7 @@ export default {
     .infoWidthChat {
         display: flex;
         justify-content: center;
-        color: #33383b;
+        color: $backgroundGrayLight;
     }
 
     .scrollColumn {
@@ -122,13 +124,13 @@ export default {
         } 
 
         &::-webkit-scrollbar-thumb {
-            background-color: #33383b;
-            border-radius: 5px;
+            background-color: $backgroundGrayLight;
+            border-radius: $borderRaiusGeneric;
             border: none;
         }
 
         &::-webkit-scrollbar-track {
-            border-radius: 5px;  
+            border-radius: $borderRaiusGeneric;  
         }
     }
 

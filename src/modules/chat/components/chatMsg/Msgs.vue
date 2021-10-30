@@ -53,10 +53,12 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .historyMsg {
         height: 100%;
         width: 100%;
-        background: #0d1418;
+        background: $historyChat;
         padding-top: 2vh;
     }
 
@@ -66,7 +68,7 @@ export default {
         align-items: center;
         justify-content: center;
         height: 100%;
-        color: #33383b;
+        color: $backgroundOne;
     }
 
     .activeFlex {
@@ -74,13 +76,13 @@ export default {
     }
 
     .cardRight {
-        background: #056162;
+        background: $cardRight;
         color: white;
         margin-right: 1vw;
     }
 
     .cardLeft {
-        color: #33383b;
+        color: $backgroundOne;
     }
 
     .directionCard {
@@ -112,13 +114,13 @@ export default {
         } 
 
         &::-webkit-scrollbar-thumb {
-            background-color: #33383b;
-            border-radius: 5px;
+            background-color: $backgroundGrayLight;
+            border-radius: $borderRaiusGeneric;
             border: none;
         }
 
         &::-webkit-scrollbar-track {
-            border-radius: 5px;  
+            border-radius: $borderRaiusGeneric;  
         }
     }
 

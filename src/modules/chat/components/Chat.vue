@@ -33,18 +33,20 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .chatComp {
-        background: #262d31;
+        background: $backgroundTwo;
         height: 98vh;
         width: auto;
         margin-top: 1vh;
         margin-left: 1vw;
         margin-right: 1vw;
-        color: #d8dee2;
-        border-top: 2px solid #262d31;
-        border-left: 2px solid #262d31;
-        border-right: 2px solid #262d31;
-        border-radius: 5px;
+        color: $fontColorChat;
+        border-top: 2px solid $backgroundTwo;
+        border-left: 2px solid $backgroundTwo;
+        border-right: 2px solid $backgroundTwo;
+        border-radius: $borderRaiusGeneric;
     }
 
     .messages {
@@ -61,7 +63,7 @@ export default {
         justify-content: center;
         align-items: center;
         height: 100%;
-        color: #33383b;
+        color: $backgroundGrayLight;
     }
 
 </style>

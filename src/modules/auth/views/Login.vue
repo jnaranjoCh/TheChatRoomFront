@@ -83,8 +83,10 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .screen {
-        background: #131c21;
+        background: $backgroundOne;
         display: flex;
         flex-direction: row;
         height: 100vh;
@@ -93,7 +95,7 @@ export default {
     }
 
     .login {
-        border: 1px solid #33383b;
+        border: 1px solid $backgroundGrayLight;
         border-radius: 20px;
         height: 35%;
         width: 20%;

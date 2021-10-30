@@ -28,13 +28,15 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .histComp {
-        background: #131c21;
+        background: $backgroundOne;
         height: 98vh;
         width: auto;
         margin-top: 1vh;
         margin-left: 1vw;
-        border-radius: 5px;
+        border-radius: $borderRaiusGeneric;
     }
 
     .presentComp {

@@ -45,11 +45,13 @@ export default {
 
 <style scoped lang="scss">
 
+    @import '@/styles/styles.scss';
+
     .home {
         display: flex;
         flex-direction: row;
         height: 100vh;
-        background:  #090e11;
+        background: $backgroundThree;
     }
 
     .history {

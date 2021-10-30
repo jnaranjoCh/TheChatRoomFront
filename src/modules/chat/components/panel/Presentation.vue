@@ -35,14 +35,16 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .presentation {
-        background: #33383b;
+        background: $backgroundGrayLight;
         display: flex;
         flex-direction: row;
         color: white;
         height: 100%;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-top-left-radius: $borderRaiusGeneric;
+        border-top-right-radius: $borderRaiusGeneric;
     }
 
     .nameUser {

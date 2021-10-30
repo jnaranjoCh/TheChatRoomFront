@@ -90,6 +90,8 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '@/styles/styles.scss';
+
     .boxMsg {
         margin: auto;
         height: 100%;
@@ -105,7 +107,7 @@ export default {
     }
 
     .inputText {
-        background: #33383b;
+        background: $backgroundGrayLight;
         border-radius: 20px;
         color: white;
         padding-left: 2%;

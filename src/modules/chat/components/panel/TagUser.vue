@@ -63,6 +63,8 @@ export default {
 
 <style lang="scss" scoped>
 
+  @import '@/styles/styles.scss';
+
   .imgUser {
       width: 15%;
       text-align: center;
@@ -83,22 +85,22 @@ export default {
     display: flex;
     flex-direction: row;
     height: 10vh;
-    border-top: 1px solid #33383b;
-    border-bottom: 1px solid #33383b;
+    border-top: 1px solid $backgroundGrayLight;
+    border-bottom: 1px solid $backgroundGrayLight;
 
     &:hover {
       cursor: pointer;
-      background: #33383b;
+      background: $backgroundGrayLight;
     }
   }
 
   .nickName {
-    color: #c8cdd2;
+    color: $fontColorChat;
     font-size: 1.1vw;
   }
 
   .lastMsg {
-    color: #85898c;
+    color: $fontColorChatFond;
     font-size: 0.9vw;
   }
 
@@ -107,13 +109,8 @@ export default {
     justify-content: flex-end;
   }
 
-  .linea {
-    color: #c8cdd2;
-    width: 80%;
-  }
-
   .selectTagUser {
-    background: #33383b;
+    background: $backgroundGrayLight;
   }
 
 </style>
