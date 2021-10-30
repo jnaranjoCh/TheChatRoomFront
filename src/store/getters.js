@@ -12,3 +12,8 @@ export const getMsgsActive = (state) => {
 
     return state.msgsActive;
 }
+
+export const getUserIdActive = (state) => {
+
+    return state.userActive.id;
+}

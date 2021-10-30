@@ -5,7 +5,8 @@ export const urlApis = {
     getUser: ip + '/usuario/',
     createUser: ip + '/usuario',
     getSalas: ip + '/sala/',
-    getMsgs: ip + '/mensaje/'
+    getMsgs: ip + '/mensaje/',
+    insertMsg: ip + '/mensaje'
 }
 
 export const getBasic = {

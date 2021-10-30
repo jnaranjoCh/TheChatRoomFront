@@ -2,7 +2,7 @@
     <InfoUser :nameUser="sala.usuario.nickName"></InfoUser>
     <div class="historyMsg container">
         
-        <div v-if="getMsgsActive.length > 0">
+        <div v-if="getMsgsActive.length > 0" class="scrollMsg" id="scrollMsg">
             
             <div v-for="(msg, index) in getMsgsActive" :key="index">
 
@@ -91,6 +91,34 @@ export default {
         min-width: 10%;
         width: auto;
         margin-bottom: 2vh;
+    }
+
+    .scrollMsg {
+        height: 90%;
+        overflow-y: auto;
+        scroll-snap-type: y proximity;
+
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+
+        &::-webkit-scrollbar:vertical {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-button:increment, &::-webkit-scrollbar-button {
+            display: none;
+        } 
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #33383b;
+            border-radius: 5px;
+            border: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;  
+        }
     }
 
 </style>

@@ -1,17 +1,13 @@
 <template>
   <div class="listHistory">
-      <div v-if="historial.length > 0">
+      <div v-if="historial.length > 0" class="scrollColumn">
 
-        <div class="scrollColumn">
+        <div v-for="(hist, index) in historial" :key="index">
 
-            <div v-for="(hist, index) in historial" :key="index">
+            <TagUser :user="hist"></TagUser>
 
-                <TagUser :user="hist"></TagUser>
-
-            </div>
-        
         </div>
-
+        
       </div>
       <div v-else>
 
@@ -91,7 +87,31 @@ export default {
     }
 
     .scrollColumn {
+        
+        height: 100%;
+        overflow-y: auto;
 
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+
+        &::-webkit-scrollbar:vertical {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-button:increment, &::-webkit-scrollbar-button {
+            display: none;
+        } 
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #33383b;
+            border-radius: 5px;
+            border: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            border-radius: 5px;  
+        }
     }
 
 </style>
