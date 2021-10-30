@@ -13,3 +13,7 @@ export const resetMsgs = (state) => {
 export const updateMsgs = (state, msgs) => {
     state.msgsActive = msgs;
 }
+
+export const updateSalas = (state, salas) => {
+    state.salasListActive = salas;
+}

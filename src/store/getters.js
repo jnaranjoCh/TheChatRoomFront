@@ -15,5 +15,10 @@ export const getMsgsActive = (state) => {
 
 export const getUserIdActive = (state) => {
 
-    return state.userActive.id;
+    return state.userActive ? state.userActive.id : null;
+}
+
+export const getListSalas = (state) => {
+
+    return state.salasListActive;
 }

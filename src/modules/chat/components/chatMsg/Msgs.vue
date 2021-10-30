@@ -76,6 +76,7 @@ export default {
     .cardRight {
         background: #056162;
         color: white;
+        margin-right: 1vw;
     }
 
     .cardLeft {

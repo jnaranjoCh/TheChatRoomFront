@@ -17,7 +17,34 @@ export const actionInsertMsg = async({ commit, state }, msg) => {
         msg
     ];
 
-    console.log(newState);
-
     commit('updateMsgs', newState);
+}
+
+export const actionListSalas = async({ commit }, salas) => {
+    commit('updateSalas', salas);
+}
+
+export const actionUpListSalas = async({ commit, state }, sala) => {
+
+    const newList = [
+        sala,
+        ...state.salasListActive
+    ];
+
+    commit('updateSalas', newList);
+}
+
+export const actionUpdateSala = async({ commit }, sala) => {
+    commit('updateSala', sala);
+}
+
+export const actionUltSala = async({ commit, state }, ultMsg) => {
+
+    const newList = [
+        ...state.salasListActive
+    ];
+
+    newList[state.salaActive.index].ultMsg = ultMsg;
+
+    commit('updateSalas', newList);
 }

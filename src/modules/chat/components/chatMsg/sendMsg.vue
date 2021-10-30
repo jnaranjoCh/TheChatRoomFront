@@ -19,8 +19,12 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from 'vuex';
 import { postBasic, urlApis } from '@/config/apisRutes';
+
+const Swal = require('sweetalert2');
+
 export default {
     name: 'SendMsg',
     data() {
@@ -31,6 +35,9 @@ export default {
     methods: {
         async sendMsg() {
 
+            if (this.msg.length === 0)
+                return;
+
             const data = await fetch( urlApis.insertMsg, postBasic( JSON.stringify({
                 fecha: new Date(),
                 texto: this.msg,
@@ -39,11 +46,19 @@ export default {
                 idSala: this.getSalaActive.id
             })));
 
+            if (data.status > 400) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ocurrió un error',
+                    text: 'No se pudo enviar el mensaje'
+                });
+
+                return;
+            }
+
             const response = await data.json();
 
             if (response) {
-                
-                //insertar mensaje en el state de mensajes
 
                 this.$store.dispatch('actionInsertMsg', {
 
@@ -52,9 +67,17 @@ export default {
                     texto: response.texto,
                     reqOrResp: true
                 });
+                this.$store.dispatch('actionUltSala', response.texto);
 
                 // enviar socket del response
                 this.msg = '';
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ocurrió un error',
+                    text: 'No se pudo registrar el mensaje'
+                });
             }
         }
     },

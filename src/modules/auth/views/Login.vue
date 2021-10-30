@@ -24,6 +24,8 @@
 import { mapMutations } from 'vuex';
 import { urlApis, postBasic, getBasic } from '@/config/apisRutes';
 
+const Swal = require('sweetalert2');
+
 export default {
     data() {
         return {
@@ -49,9 +51,17 @@ export default {
             const data = await fetch( urlApis.createUser, postBasic( JSON.stringify({ nickName: this.user })));
             const response = await data.json();
 
-            if (response)
+            if (response) {
+
                 this.saveStateUser(response);
                 this.$router.push({ path: '/home' });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ocurrió un error',
+                    text: 'No se pudo registrar el usuario'
+                });
+            }
         },
         saveStateUser(newUSer) {
 
