@@ -17,3 +17,10 @@ export const updateMsgs = (state, msgs) => {
 export const updateSalas = (state, salas) => {
     state.salasListActive = salas;
 }
+
+export const resetStates = (state) => {
+    state.userActive = null;
+    state.salaActive = null;
+    state.salasListActive = [];
+    state.msgsActive = [];
+}

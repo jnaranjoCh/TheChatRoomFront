@@ -6,21 +6,29 @@
       <div class="nameUser">
           <h4> {{ userActive.nickName }} </h4>
       </div>
+      <div class="logout" @click="logout()">
+          Salir
+      </div>
   </div>
 </template>
 
 <script>
 
-import { mapState, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
     name: 'Presentation',
     computed: {
-        ...mapState(['userActive']),
-        ...mapMutations(['updateUser'])
+        ...mapState(['userActive'])
     },
     methods: {
-
+        logout() {
+            this.$router.push({ path: '/login' });
+            localStorage.removeItem('user');
+        }
+    },
+    unmounted() {
+        this.$store.dispatch('resetAllStates');
     }
 }
 </script>
@@ -52,6 +60,12 @@ export default {
 
     .image {
         width: 75%;
+    }
+
+    .logout {
+        align-self: center;
+        margin-right: 1vw;
+        cursor: pointer;
     }
 
 </style>

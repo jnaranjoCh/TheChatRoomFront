@@ -22,3 +22,8 @@ export const getListSalas = (state) => {
 
     return state.salasListActive;
 }
+
+export const getIndexSala = (state) => {
+
+    return state.salaActive === null ? -1 : state.salaActive.index;
+}

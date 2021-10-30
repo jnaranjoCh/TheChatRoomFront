@@ -1,5 +1,5 @@
 <template>
-  <div class="tagUser" v-on:click="selectChat()">
+  <div class="tagUser" v-on:click="selectChat()" v-bind:class="{ 'selectTagUser': validateSelect() }">
     <div class="imgUser">
         <img src="@/assets/user.png" alt="user" class="image"/>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import { getBasic, urlApis } from '@/config/apisRutes';
 
 export default {
@@ -29,6 +29,9 @@ export default {
     },
     methods: {
 
+      validateSelect() {
+        return this.getIndexSala === this.user.index;
+      },
       selectChat() {
         this.getMessages();
         this.updateSala(this.user);
@@ -50,7 +53,10 @@ export default {
 
             this.$store.dispatch('actionUpdateMsgs', result);
       },
-      ...mapMutations(['updateSala'])  
+      ...mapMutations(['updateSala']),
+    },
+    computed: {
+      ...mapGetters(['getIndexSala'])
     }
 }
 </script>
@@ -104,6 +110,10 @@ export default {
   .linea {
     color: #c8cdd2;
     width: 80%;
+  }
+
+  .selectTagUser {
+    background: #33383b;
   }
 
 </style>

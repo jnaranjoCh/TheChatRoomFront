@@ -48,3 +48,7 @@ export const actionUltSala = async({ commit, state }, ultMsg) => {
 
     commit('updateSalas', newList);
 }
+
+export const resetAllStates = async({ commit }) => {
+    commit('resetStates');
+}
