@@ -42,11 +42,20 @@ export default {
             type: Object
         }
     },
+    data() {
+        return {
+            scrollMsg: ''
+        }
+    },
     components: {
         InfoUser: defineAsyncComponent( () => import('./InfoUser.vue')),
     },
     computed: {
         ...mapGetters(['getMsgsActive'])
+    },
+    updated() {
+        let objDiv = document.getElementById("scrollMsg");
+        objDiv.scrollTop = objDiv.scrollHeight;
     }
 }
 </script>
