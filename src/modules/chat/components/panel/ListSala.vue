@@ -39,7 +39,7 @@ export default {
     },
     computed: {
         ...mapMutations(['updateUser', 'updateSalas']),
-        ...mapState(['userActive']),
+        ...mapState(['userActive', 'salasListActive', 'salaActive']),
         ...mapGetters(['getListSalas'])
     },
     methods: {
@@ -83,11 +83,78 @@ export default {
 
             } else
                 this.historial = [];
+        },
+        insertMsg() {
+
+            this.sockets.subscribe('msg:'+this.userActive.id, data => {
+
+                const sala = this.salasListActive.find(x => x.id == data.idSala);
+
+                if (sala) {
+
+                    this.$store.dispatch('actionUltSala', { ultMsg: data.mensaje, index: sala.index });
+                    
+                    const salaActiva = this.salaActive !== null && this.salaActive.id === data.idSala;
+
+                    if (salaActiva) {
+                    
+                        this.$store.dispatch('actionInsertMsg', {
+                            id: data.idMensaje,
+                            fecha: data.fecha,
+                            texto: data.mensaje,
+                            reqOrResp: false
+                        });
+                    
+                    } else {
+                    
+                        console.log('no esta abierta');
+                        // ---indico en el front que esa sala ha recibido un mensaje (como en whatsApp, icono verde)
+                    }    
+
+                } else {
+                    
+                    this.findSalaAndAddState(data.idSala);
+                    // ---indico en el front que esa sala ha recibido un mensaje (como en whatsApp, icono verde)
+                }
+            });
+        },
+        async findSalaAndAddState(idSala) {
+
+            const sala = await fetch( urlApis.findSalaById + idSala, getBasic);
+            const response = await sala.json();
+
+            if (response._id) {
+
+                const newSala = {
+                    id: response._id,
+                    index: this.salasListActive.length,
+                    ultMsg: response.ultimoMsg,
+                    usuario: {
+                        id: response.usuarioEmisor._id,
+                        nickName: response.usuarioEmisor.nickName
+                    }
+                }
+
+                this.$store.dispatch('actionUltSala', { ultMsg: response.ultimoMsg, index: newSala.index });
+                this.$store.dispatch('actionUpListSalas', newSala);
+
+            } else {
+                console.log('Ocurrio un problema la sala no existe');
+            }
         }
     },
-    created() {
+    async created() {
 
-        this.getSalas();
+        await this.getSalas();
+        this.insertMsg();
+    },
+    sockets: {
+        connect() {
+            console.log('socket chat connect');
+        }
+    },
+    unmounted() {
+        this.sockets.unsubscribe('msg:'+this.userActive.id);
     }
 }
 </script>

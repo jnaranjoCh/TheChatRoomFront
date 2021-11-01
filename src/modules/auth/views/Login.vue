@@ -66,7 +66,7 @@ export default {
         saveStateUser(newUSer) {
 
             const insertUser = { id: newUSer._id, nickName: newUSer.nickName };
-            localStorage.setItem('user', JSON.stringify(insertUser));
+            sessionStorage.setItem('user', JSON.stringify(insertUser));
             this.updateUser(insertUser);
         },
         deleteData() {

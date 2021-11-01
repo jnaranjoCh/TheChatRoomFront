@@ -5,9 +5,12 @@ export const urlApis = {
     getUser: ip + '/usuario/',
     createUser: ip + '/usuario',
     getSalas: ip + '/sala/',
+    findSalaById: ip + '/sala/findSala/',
     createSala: ip + '/sala',
     getMsgs: ip + '/mensaje/',
-    insertMsg: ip + '/mensaje'
+    insertMsg: ip + '/mensaje',
+    socketIP: ip,
+    socketNameSpace: '/theChatRoomFront/'
 }
 
 export const getBasic = {

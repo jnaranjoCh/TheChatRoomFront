@@ -47,6 +47,7 @@ export default {
                 const sala = {
                     id: response._id,
                     ultMsg: '',
+                    index: this.salasListActive.length,
                     usuario: {
                         id: response.usuarioReceptor._id,
                         nickName: response.usuarioReceptor.nickName
@@ -55,6 +56,7 @@ export default {
 
                 this.$store.dispatch('actionUpdateSala', sala);
                 this.$store.dispatch('actionUpListSalas', sala);
+                this.$store.dispatch('actionUpdateMsgs', []);
             } else {
 
                 Swal.fire({
@@ -68,7 +70,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['userActive'])
+        ...mapState(['userActive', 'salasListActive'])
     }
 }
 </script>

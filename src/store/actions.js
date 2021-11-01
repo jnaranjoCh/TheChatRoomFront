@@ -27,8 +27,8 @@ export const actionListSalas = async({ commit }, salas) => {
 export const actionUpListSalas = async({ commit, state }, sala) => {
 
     const newList = [
-        sala,
-        ...state.salasListActive
+        ...state.salasListActive,
+        sala
     ];
 
     commit('updateSalas', newList);
@@ -38,13 +38,13 @@ export const actionUpdateSala = async({ commit }, sala) => {
     commit('updateSala', sala);
 }
 
-export const actionUltSala = async({ commit, state }, ultMsg) => {
+export const actionUltSala = async({ commit, state }, { ultMsg, index }) => {
 
     const newList = [
         ...state.salasListActive
     ];
 
-    newList[state.salaActive.index].ultMsg = ultMsg;
+    newList[index].ultMsg = ultMsg;
 
     commit('updateSalas', newList);
 }

@@ -4,7 +4,7 @@
           <img src="@/assets/user.png" alt="user" class="image"/>
       </div>
       <div class="nameUser">
-          <h4> {{ userActive.nickName }} </h4>
+          <label> {{ userActive.nickName }} </label>
       </div>
       <div class="logout" @click="logout()">
           Salir
@@ -24,7 +24,7 @@ export default {
     methods: {
         logout() {
             this.$router.push({ path: '/login' });
-            localStorage.removeItem('user');
+            sessionStorage.removeItem('user');
         }
     },
     unmounted() {

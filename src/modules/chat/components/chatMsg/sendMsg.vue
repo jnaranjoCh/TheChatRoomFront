@@ -3,11 +3,11 @@
 
         <div class="row boxMsg">
 
-            <div class="col-11">
+            <div class="col-10">
                 <input type="text" class="form-control inputText" placeholder="Escriba un mensaje" maxlength="100"
                 v-model="msg" v-on:keypress.enter="sendMsg()">
             </div>
-            <div class="col-1 icons">
+            <div class="col-2 icons">
                 <span class="enviarText" @click="sendMsg()">
                     Enviar
                 </span>
@@ -20,7 +20,7 @@
 
 <script>
 
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import { postBasic, urlApis } from '@/config/apisRutes';
 
 const Swal = require('sweetalert2');
@@ -61,15 +61,15 @@ export default {
             if (response) {
 
                 this.$store.dispatch('actionInsertMsg', {
-
                     id: response._id,
                     fecha: response.fecha,
                     texto: response.texto,
                     reqOrResp: true
                 });
-                this.$store.dispatch('actionUltSala', response.texto);
+                this.$store.dispatch('actionUltSala', { ultMsg: response.texto, index: this.salaActive.index });
 
-                // enviar socket del response
+                this.sendMsgSocket(response);
+
                 this.msg = '';
 
             } else {
@@ -79,12 +79,32 @@ export default {
                     text: 'No se pudo registrar el mensaje'
                 });
             }
-        }
+        },
+        sendMsgSocket(response) {
+
+            const info = {
+
+                idSala: response.sala._id,
+                idUsuarioReceptor: response.usuarioReceptor._id,
+                idUsuarioEmisor: response.usuarioEmisor._id,
+                mensaje: response.texto,
+                fecha: response.fecha,
+                idMensaje: response._id
+            }
+
+            this.$socket.emit('msgToServer', info);
+        }        
     },
     computed: {
         ...mapActions(['actionInsertMsg']),
-        ...mapGetters(['getMsgsActive', 'getUserIdActive', 'getSalaActive'])
-    }
+        ...mapGetters(['getMsgsActive', 'getUserIdActive', 'getSalaActive']),
+        ...mapState(['salaActive'])
+    },
+    sockets: {
+        connect() {
+            console.log('socket connect');
+        }
+    } 
 }
 </script>
 

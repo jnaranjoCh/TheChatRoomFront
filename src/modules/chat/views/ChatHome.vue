@@ -36,8 +36,7 @@ export default {
     methods: {
 
         validateUser() {
-
-            this.$store.dispatch('actionUserUp', JSON.parse( localStorage.getItem('user') ));
+            this.$store.dispatch('actionUserUp', JSON.parse( sessionStorage.getItem('user') ));
         }
     }
 }
