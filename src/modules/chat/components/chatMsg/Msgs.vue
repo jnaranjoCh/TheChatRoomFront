@@ -14,6 +14,9 @@
                             <div class="card-body">
                                 <h6 class="card-subtitle mb-2">{{ msg.texto }}</h6>
                             </div>
+                            <div class="fecha" v-bind:class="{ 'fechaRight': msg.reqOrResp, 'fechaLeft': !msg.reqOrResp }">
+                                {{ momentDate(msg.fecha) }}
+                            </div>
                         </div>
                     </div>
 
@@ -34,6 +37,7 @@
 
 import { defineAsyncComponent } from 'vue'
 import { mapGetters } from 'vuex';
+import moment from 'moment';
 
 export default {
     name: 'Msgs',
@@ -52,6 +56,11 @@ export default {
     },
     computed: {
         ...mapGetters(['getMsgsActive'])
+    },
+    methods: {
+        momentDate(date) {
+            return moment(date).format('MMMM Do, h:mm:ss');
+        }
     },
     updated() {
         let objDiv = document.getElementById("scrollMsg");
@@ -100,9 +109,24 @@ export default {
 
     .textBoxMsg {
         max-width: 50%;
-        min-width: 10%;
+        min-width: 15%;
         width: auto;
         margin-bottom: 2vh;
+    }
+
+    .fecha {
+        font-size: 0.8vw;
+        text-align: end;
+        padding-right: 5%;
+        padding-bottom: 5%;
+    }
+
+    .fechaLeft {
+        color: $backgroundGrayLight;
+    }
+
+    .fechaRight {
+        color: $fontColorChat;
     }
 
     .scrollMsg {
